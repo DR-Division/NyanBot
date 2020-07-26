@@ -1,0 +1,7 @@
+main: com.cat.BotMain
+name: NyanBot
+version: 1.0
+author: DR_Division
+commands:
+  nyan:
+    description: BOT!
