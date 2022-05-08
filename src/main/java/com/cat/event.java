@@ -37,47 +37,7 @@ public class event extends ListenerAdapter {
         User user = e.getAuthor();
         TextChannel channel = e.getTextChannel();
         Message msg = e.getMessage();
-        if (msg.getContentRaw().contains("-돈")) {
-            String[] textarr = msg.getContentRaw().split(" ");
-            try {
-                int count = 1;
-                String result, all[];
-                StringBuilder builder = new StringBuilder();
-                URL url = new URL("http://zbc.caramel.moe/api/player_point_top.php");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-                result = reader.readLine();
-                while (result != null) {
-                    builder.append(result);
-                    result = reader.readLine();
-                }
-                all = builder.toString().split("}");
-                EmbedBuilder embed = new EmbedBuilder();
-                embed.setTitle("카운터 온라인 돈 순위");
-                for (String val : all) {
-                    int index = 0;
-                    String[] temp = val.split(",");
-                    for (int i = 0; i < temp.length; i++){
-                        if (temp[i].contains("name"))
-                            index = i;
-                    }
-                    if (index == 0 || count == 26)
-                        break;
-                    temp[index] = temp[index].replace("\"", "");
-                    temp[index] = temp[index].replace(":", "");
-                    temp[index] = temp[index].replace("name", "");
-                    temp[index+1] = temp[index+1].replace("balance", "");
-                    temp[index+1] = temp[index+1].replace("\"", "");
-                    temp[index+1] = temp[index+1].replace(":","");
-                    embed.addField(count + "위.", temp[index]+ " : "+ temp[index+1] + "원", false);
-                    count++;
-                }
-                channel.sendMessage(embed.build()).queue();
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        else if (msg.getContentRaw().contains("-아바타")){
+        if (msg.getContentRaw().contains("-아바타")){
             if (user.getAvatarUrl() != null)
                 channel.sendMessage(user.getAvatarUrl()).queue();
             else
